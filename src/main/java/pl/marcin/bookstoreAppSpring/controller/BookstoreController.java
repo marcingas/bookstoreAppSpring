@@ -25,7 +25,7 @@ public class BookstoreController {
         return bService.addBook(bookItem);
     }
     @PutMapping("/books/{id}")
-    public BookItem updateBook(@PathVariable Long id, @RequestBody BookItem bookItem){
+    public BookItem updateBook(@PathVariable Long id,@Valid @RequestBody BookItem bookItem){
         bookItem.setId(id);
         return bService.updateBook(bookItem);
     }
