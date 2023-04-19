@@ -1,5 +1,6 @@
 package pl.marcin.bookstoreAppSpring.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.marcin.bookstoreAppSpring.model.BookItem;
@@ -20,7 +21,7 @@ public class BookstoreController {
         return bService.getBook(id);
     }
     @PostMapping("/books")
-    public BookItem addBook(@RequestBody BookItem bookItem){
+    public BookItem addBook(@Valid @RequestBody BookItem bookItem){
         return bService.addBook(bookItem);
     }
     @PutMapping("/books/{id}")
