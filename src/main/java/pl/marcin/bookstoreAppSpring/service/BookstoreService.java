@@ -10,5 +10,8 @@ public interface BookstoreService {
     BookItem addBook(BookItem bookItem);
     void deleteBook(Long id);
     BookItem updateBook(BookItem bookItem);
+    List<BookItem>getBookByTitle(String title);
+    List<BookItem>getBookByTitleAndAuthor(String title,String author);
+    List<BookItem>getBookByKeyword(String keyword);
 
 }

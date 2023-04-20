@@ -41,4 +41,19 @@ public class BookstoreServiceImplementation implements BookstoreService{
     public BookItem updateBook(BookItem bookItem) {
         return bRepository.save(bookItem);
     }
+
+    @Override
+    public List<BookItem> getBookByTitle(String title) {
+        return bRepository.findByTitle(title);
+    }
+
+    @Override
+    public List<BookItem> getBookByTitleAndAuthor(String title, String author) {
+        return bRepository.findByTitleAndAuthor(title, author);
+    }
+
+    @Override
+    public List<BookItem> getBookByKeyword(String keyword) {
+        return bRepository.findByTitleContaining(keyword);
+    }
 }

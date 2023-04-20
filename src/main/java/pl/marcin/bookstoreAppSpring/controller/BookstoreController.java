@@ -19,7 +19,7 @@ public class BookstoreController {
         return new ResponseEntity<List<BookItem>>(bService.getBooks(),HttpStatus.OK);
     }
     @GetMapping("/books/{id}")
-    public ResponseEntity<BookItem> getBook(@PathVariable Long id){
+    public ResponseEntity<BookItem> getBook(@Valid @PathVariable Long id){
 
         return new ResponseEntity<BookItem>(bService.getBook(id),HttpStatus.OK);
     }
@@ -37,5 +37,17 @@ public class BookstoreController {
     public ResponseEntity<HttpStatus> deleteBook(@RequestParam Long id){
         bService.deleteBook(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/books/filterByTitle")
+    public ResponseEntity<List<BookItem>>getBookByTitle(@RequestParam String title){
+        return new ResponseEntity<List<BookItem>>(bService.getBookByTitle(title),HttpStatus.OK);
+    }
+    @GetMapping("/books/filterByTitleAuthor")
+    public ResponseEntity<List<BookItem>>getBookByTitleAuthor(@RequestParam String title, @RequestParam String author){
+        return  new ResponseEntity<List<BookItem>>(bService.getBookByTitleAndAuthor(title, author),HttpStatus.OK);
+    }
+    @GetMapping("/books/filterByKeyword")
+    public ResponseEntity<List<BookItem>>getBookByKeyword(@RequestParam String keyword){
+        return new ResponseEntity<List<BookItem>>(bService.getBookByKeyword(keyword),HttpStatus.OK);
     }
 }
