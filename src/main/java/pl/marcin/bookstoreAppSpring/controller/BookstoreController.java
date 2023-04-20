@@ -2,6 +2,8 @@ package pl.marcin.bookstoreAppSpring.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.marcin.bookstoreAppSpring.model.BookItem;
 import pl.marcin.bookstoreAppSpring.service.BookstoreService;
@@ -13,25 +15,27 @@ public class BookstoreController {
     @Autowired
     BookstoreService bService;
     @GetMapping("/books")
-    public List<BookItem> getBooks(){
-        return bService.getBooks();
+    public ResponseEntity<List<BookItem>> getBooks(){
+        return new ResponseEntity<List<BookItem>>(bService.getBooks(),HttpStatus.OK);
     }
     @GetMapping("/books/{id}")
-    public BookItem getBook(@PathVariable Long id){
-        return bService.getBook(id);
+    public ResponseEntity<BookItem> getBook(@PathVariable Long id){
+
+        return new ResponseEntity<BookItem>(bService.getBook(id),HttpStatus.OK);
     }
     @PostMapping("/books")
-    public BookItem addBook(@Valid @RequestBody BookItem bookItem){
-        return bService.addBook(bookItem);
+    public ResponseEntity<BookItem> addBook(@Valid @RequestBody BookItem bookItem){
+
+        return new ResponseEntity<>(bService.addBook(bookItem),HttpStatus.CREATED);
     }
     @PutMapping("/books/{id}")
-    public BookItem updateBook(@PathVariable Long id,@Valid @RequestBody BookItem bookItem){
+    public ResponseEntity<BookItem> updateBook(@PathVariable Long id,@Valid @RequestBody BookItem bookItem){
         bookItem.setId(id);
-        return bService.updateBook(bookItem);
+        return new ResponseEntity<BookItem>(bService.updateBook(bookItem),HttpStatus.OK);
     }
     @DeleteMapping("/books")
-    public String deleteBook(@RequestParam Long id){
+    public ResponseEntity<HttpStatus> deleteBook(@RequestParam Long id){
         bService.deleteBook(id);
-        return "Book, id: " + id + " deleted";
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }
