@@ -52,4 +52,8 @@ public class BookstoreController {
     public ResponseEntity<List<BookItem>>getBookByKeyword(@RequestParam String keyword){
         return new ResponseEntity<List<BookItem>>(bService.getBookByKeyword(keyword),HttpStatus.OK);
     }
+    @GetMapping("/books/{id}/{author}")
+    public ResponseEntity<List<BookItem>>getBookByIdAndAuthor(@PathVariable Long id, @PathVariable String author){
+        return new ResponseEntity<List<BookItem>>(bService.getBooksByIdAndAuthor(id,author),HttpStatus.OK);
+    }
 }

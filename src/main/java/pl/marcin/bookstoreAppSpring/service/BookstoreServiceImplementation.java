@@ -60,4 +60,9 @@ public class BookstoreServiceImplementation implements BookstoreService{
     public List<BookItem> getBookByKeyword(String keyword) {
         return bRepository.findByTitleContaining(keyword);
     }
+
+    @Override
+    public List<BookItem> getBooksByIdAndAuthor(Long id, String author) {
+        return bRepository.getBookItemByIdAndAuthor(0L,"author");
+    }
 }

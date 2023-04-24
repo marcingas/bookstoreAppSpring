@@ -15,5 +15,6 @@ public interface BookstoreService {
     List<BookItem>getBookByTitle(String title);
     List<BookItem>getBookByTitleAndAuthor(String title,String author);
     List<BookItem>getBookByKeyword(String keyword);
+    List<BookItem> getBooksByIdAndAuthor(Long id, String author);
 
 }
