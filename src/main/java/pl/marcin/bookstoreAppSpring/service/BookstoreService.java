@@ -1,11 +1,13 @@
 package pl.marcin.bookstoreAppSpring.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.marcin.bookstoreAppSpring.model.BookItem;
 
 import java.util.List;
 
 public interface BookstoreService {
-    List<BookItem> getBooks();
+    Page<BookItem> getBooks(Pageable page);
     BookItem getBook(Long id);
     BookItem addBook(BookItem bookItem);
     void deleteBook(Long id);

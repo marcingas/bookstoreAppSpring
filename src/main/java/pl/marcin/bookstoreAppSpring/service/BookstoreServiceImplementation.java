@@ -1,9 +1,12 @@
 package pl.marcin.bookstoreAppSpring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.marcin.bookstoreAppSpring.model.BookItem;
 import pl.marcin.bookstoreAppSpring.repository.BookstoreRepository;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +16,9 @@ public class BookstoreServiceImplementation implements BookstoreService{
     @Autowired
     BookstoreRepository bRepository;
     @Override
-    public List<BookItem> getBooks() {
-        return bRepository.findAll();
+    public Page<BookItem> getBooks(Pageable page) {
+
+        return bRepository.findAll(page);
     }
 
     @Override
