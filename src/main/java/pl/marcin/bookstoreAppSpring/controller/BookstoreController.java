@@ -56,4 +56,9 @@ public class BookstoreController {
     public ResponseEntity<List<BookItem>>getBookByIdAndAuthor(@PathVariable Long id, @PathVariable String author){
         return new ResponseEntity<List<BookItem>>(bService.getBooksByIdAndAuthor(id,author),HttpStatus.OK);
     }
+    @DeleteMapping("books/delete/{title}")
+    public ResponseEntity<String>deleteBookByTitle(@PathVariable String title){
+        return new ResponseEntity<String>(bService.deleteBookByTitle(title) +
+                " No of records deleted",HttpStatus.OK);
+    }
 }

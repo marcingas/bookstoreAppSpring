@@ -65,4 +65,9 @@ public class BookstoreServiceImplementation implements BookstoreService{
     public List<BookItem> getBooksByIdAndAuthor(Long id, String author) {
         return bRepository.getBookItemByIdAndAuthor(0L,"author");
     }
+
+    @Override
+    public Integer deleteBookByTitle(String title) {
+        return bRepository.deleteBookByTitle(title);
+    }
 }
