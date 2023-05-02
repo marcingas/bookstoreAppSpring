@@ -46,5 +46,8 @@ public class BookItem {
 
     public BookItem(BookstoreRequest bRequest) {
         this.title= bRequest.getTitle();
+        this.author = bRequest.getAuthor();
+        this.description = bRequest.getDescription();
+        this.issueYear = bRequest.getIssueYear();
     }
 }

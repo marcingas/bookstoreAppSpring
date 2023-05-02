@@ -8,4 +8,7 @@ import lombok.Setter;
 public class BookstoreRequest {
     private String title;
     private String section;
+    private String author;
+    private String description;
+    private int issueYear;
 }
