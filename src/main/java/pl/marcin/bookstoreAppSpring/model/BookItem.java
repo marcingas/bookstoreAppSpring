@@ -3,10 +3,12 @@ package pl.marcin.bookstoreAppSpring.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.marcin.bookstoreAppSpring.request.BookstoreRequest;
 
 import java.sql.Date;
 
@@ -14,16 +16,17 @@ import java.sql.Date;
 @Setter
 @ToString
 @Entity
-@Table(name="book_tbl")
+@Table(name="bookone_tbl")
+@NoArgsConstructor
 public class BookItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank(message = "title: should not be null")
+//    @NotBlank(message = "title: should not be null")
     @Column(name="title")
     private String title;
-    @NotBlank(message = "author: should not be null")
+//    @NotBlank(message = "author: should not be null")
     @Column(name="author")
     private String author;
     @Column(name="description")
@@ -37,4 +40,11 @@ public class BookItem {
     @Column(name="date_updated")
     private Date dateUpdated;
 
+    @JoinColumn(name = "section_id")
+    @OneToOne
+    private Section section;
+
+    public BookItem(BookstoreRequest bRequest) {
+        this.title= bRequest.getTitle();
+    }
 }

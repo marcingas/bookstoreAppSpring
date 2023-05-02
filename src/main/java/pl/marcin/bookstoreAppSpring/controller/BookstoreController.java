@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.marcin.bookstoreAppSpring.model.BookItem;
+import pl.marcin.bookstoreAppSpring.model.Section;
+import pl.marcin.bookstoreAppSpring.repository.BookstoreRepository;
+import pl.marcin.bookstoreAppSpring.repository.SectionRepository;
+import pl.marcin.bookstoreAppSpring.request.BookstoreRequest;
 import pl.marcin.bookstoreAppSpring.service.BookstoreService;
 
 import java.util.List;
@@ -16,6 +20,10 @@ import java.util.List;
 public class BookstoreController {
     @Autowired
     BookstoreService bService;
+    @Autowired
+    SectionRepository sRepository;
+    @Autowired
+    BookstoreRepository bRepository;
     @GetMapping("/books")
     public List<BookItem> getBooks(Pageable page){
         return bService.getBooks(page).toList();
@@ -26,9 +34,15 @@ public class BookstoreController {
         return new ResponseEntity<BookItem>(bService.getBook(id),HttpStatus.OK);
     }
     @PostMapping("/books")
-    public ResponseEntity<BookItem> addBook(@Valid @RequestBody BookItem bookItem){
+    public ResponseEntity<BookItem> addBook(@Valid @RequestBody BookstoreRequest bRequest){
+        Section section = new Section();
+        section.setName(bRequest.getSection());
+        section = sRepository.save(section);
+        BookItem bookItem = new BookItem(bRequest);
+        bookItem.setSection(section);
+        bookItem = bRepository.save(bookItem);
 
-        return new ResponseEntity<>(bService.addBook(bookItem),HttpStatus.CREATED);
+        return new ResponseEntity<BookItem>(bookItem,HttpStatus.CREATED);
     }
     @PutMapping("/books/{id}")
     public ResponseEntity<BookItem> updateBook(@PathVariable Long id,@Valid @RequestBody BookItem bookItem){
