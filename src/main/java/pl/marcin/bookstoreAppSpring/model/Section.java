@@ -12,7 +12,7 @@ import lombok.ToString;
 @Table(name = "section_tbl")
 public class Section {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "name")

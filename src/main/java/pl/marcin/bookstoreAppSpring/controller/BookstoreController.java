@@ -1,6 +1,7 @@
 package pl.marcin.bookstoreAppSpring.controller;
 
 import jakarta.validation.Valid;
+import org.hibernate.query.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -74,5 +75,9 @@ public class BookstoreController {
     public ResponseEntity<String>deleteBookByTitle(@PathVariable String title){
         return new ResponseEntity<String>(bService.deleteBookByTitle(title) +
                 " No of records deleted",HttpStatus.OK);
+    }
+    @GetMapping("/books/filter")
+    public ResponseEntity<List<BookItem>> getBookBySection (@RequestParam String name){
+        return new ResponseEntity<List<BookItem>>(bRepository.findBySectionName(name), HttpStatus.OK);
     }
 }

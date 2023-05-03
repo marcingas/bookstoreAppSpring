@@ -21,4 +21,5 @@ public interface BookstoreRepository extends JpaRepository<BookItem,Long> {
     @Modifying
     @Query("DELETE From BookItem WHERE title = :title")
     Integer deleteBookByTitle(String title);
+    List<BookItem>findBySectionName(String name);
 }
