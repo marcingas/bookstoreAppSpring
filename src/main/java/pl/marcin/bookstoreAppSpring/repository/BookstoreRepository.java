@@ -11,15 +11,23 @@ import pl.marcin.bookstoreAppSpring.model.BookItem;
 import java.util.List;
 
 @Repository
-public interface BookstoreRepository extends JpaRepository<BookItem,Long> {
+public interface BookstoreRepository extends JpaRepository<BookItem, Long> {
     List<BookItem> findByTitle(String title);
+
     List<BookItem> findByTitleAndAuthor(String title, String author);
+
     List<BookItem> findByTitleContaining(String keyword);
+
     @Query("FROM BookItem WHERE id = :id OR author = :author")
     List<BookItem> getBookItemByIdAndAuthor(Long id, String author);
+
     @Transactional
     @Modifying
     @Query("DELETE From BookItem WHERE title = :title")
     Integer deleteBookByTitle(String title);
-    List<BookItem>findBySectionName(String name);
+
+    List<BookItem> findBySectionName(String name);
+
+    @Query("FROM BookItem WHERE section.name = :name")
+    List<BookItem> getBookItemBySectionName(String name);
 }

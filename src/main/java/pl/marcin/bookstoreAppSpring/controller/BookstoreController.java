@@ -80,4 +80,9 @@ public class BookstoreController {
     public ResponseEntity<List<BookItem>> getBookBySection (@RequestParam String name){
         return new ResponseEntity<List<BookItem>>(bRepository.findBySectionName(name), HttpStatus.OK);
     }
+    @GetMapping("/books/jpqlfilter")
+    public ResponseEntity<List<BookItem>> getBookJpqlBySection (@RequestParam String name){
+        return new ResponseEntity<List<BookItem>>(bRepository.getBookItemBySectionName(name), HttpStatus.OK);
+    }
+
 }
