@@ -1,7 +1,6 @@
 package pl.marcin.bookstoreAppSpring.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,14 +39,14 @@ public class BookItem {
     @Column(name="date_updated")
     private Date dateUpdated;
 
-    @JoinColumn(name = "section_id")
     @OneToOne
+    @JoinColumn(name = "section_id")
     private Section section;
 
-    public BookItem(BookstoreRequest bRequest) {
-        this.title= bRequest.getTitle();
-        this.author = bRequest.getAuthor();
-        this.description = bRequest.getDescription();
-        this.issueYear = bRequest.getIssueYear();
+    public BookItem(BookstoreRequest bookstoreRequest) {
+        this.title = bookstoreRequest.getTitle();
+        this.author = bookstoreRequest.getAuthor();
+        this.description = bookstoreRequest.getDescription();
+        this.issueYear = bookstoreRequest.getIssueYear();
     }
 }

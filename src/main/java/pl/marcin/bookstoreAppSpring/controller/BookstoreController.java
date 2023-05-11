@@ -1,9 +1,7 @@
 package pl.marcin.bookstoreAppSpring.controller;
 
 import jakarta.validation.Valid;
-import org.hibernate.query.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +23,8 @@ public class BookstoreController {
     SectionRepository sRepository;
     @Autowired
     BookstoreRepository bRepository;
+
+
     @GetMapping("/books")
     public List<BookItem> getBooks(Pageable page){
         return bService.getBooks(page).toList();
@@ -35,15 +35,16 @@ public class BookstoreController {
         return new ResponseEntity<BookItem>(bService.getBook(id),HttpStatus.OK);
     }
     @PostMapping("/books")
-    public ResponseEntity<BookItem> addBook(@Valid @RequestBody BookstoreRequest bRequest){
+    public ResponseEntity<BookItem> addBook(@Valid @RequestBody BookstoreRequest bookstoreRequest){
         Section section = new Section();
-        section.setName(bRequest.getSection());
+        section.setName(bookstoreRequest.getSection());
         section = sRepository.save(section);
-        BookItem bookItem = new BookItem(bRequest);
+        BookItem bookItem = new BookItem(bookstoreRequest);
         bookItem.setSection(section);
         bookItem = bRepository.save(bookItem);
 
-        return new ResponseEntity<BookItem>(bookItem,HttpStatus.CREATED);
+        return  new ResponseEntity<BookItem>(bookItem,HttpStatus.CREATED);
+
     }
     @PutMapping("/books/{id}")
     public ResponseEntity<BookItem> updateBook(@PathVariable Long id,@Valid @RequestBody BookItem bookItem){
