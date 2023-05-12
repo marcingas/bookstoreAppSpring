@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.marcin.bookstoreAppSpring.model.Section;
 @Repository
 public interface SectionRepository extends JpaRepository<Section,Long> {
+    Section findByName(String name);
 }

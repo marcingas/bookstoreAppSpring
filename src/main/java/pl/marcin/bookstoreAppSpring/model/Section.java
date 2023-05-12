@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -19,8 +21,8 @@ public class Section {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToOne(mappedBy = "section")
+    @OneToMany(mappedBy = "section")
     @JsonIgnore
-    private BookItem bookItem;
+    private List<BookItem> bookItems;
 
 }

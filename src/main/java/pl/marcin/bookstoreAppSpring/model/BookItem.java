@@ -39,7 +39,7 @@ public class BookItem {
     @Column(name="date_updated")
     private Date dateUpdated;
 
-    @OneToOne
+    @ManyToOne()
     @JoinColumn(name = "section_id")
     private Section section;
 
@@ -48,5 +48,6 @@ public class BookItem {
         this.author = bookstoreRequest.getAuthor();
         this.description = bookstoreRequest.getDescription();
         this.issueYear = bookstoreRequest.getIssueYear();
+
     }
 }
